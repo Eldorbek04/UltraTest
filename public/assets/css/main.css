@@ -1,0 +1,577 @@
+:root {
+    --bg: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --accent: #38bdf8;
+    --text: #f1f5f9;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+}
+
+/* Tanlangan javob stili */
+.option.active {
+    background: rgba(56, 189, 248, 0.2) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    transform: scale(1.02);
+}
+
+/* Tanlov vaqtida chiroyli o'tish */
+.option {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none; /* Matnni tasodifan belgilab qo'ymaslik uchun */
+}
+
+/* --- RESPONSIVE DIZAYN --- */
+
+/* Planshetlar uchun (Max-width: 992px) */
+@media (max-width: 992px) {
+    .container {
+        padding: 20px !important;
+    }
+    
+    .glass-card {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* Telefonlar uchun (Max-width: 600px) */
+@media (max-width: 600px) {
+    /* Padding va Marginlarni kamaytiramiz */
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 10px !important;
+        margin-top: 20px !important;
+    }
+
+    /* Sarlavhalarni kichraytiramiz */
+    h2 {
+        font-size: 1.2rem !important;
+        line-height: 1.3 !important;
+    }
+
+    /* Tugmalarni to'liq ekran kengligida qilamiz */
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 15px; /* Barmoq bilan bosishga qulay bo'lishi uchun */
+    }
+
+    /* Test variantlarini mobilga moslashtirish */
+    .option {
+        padding: 12px;
+        font-size: 0.95rem;
+        margin: 8px 0;
+    }
+
+    /* Tugmalar joylashuvini ustun shakliga keltiramiz */
+    .glass-card div[style*="display: flex"] {
+        flex-direction: column-reverse; /* "Orqaga" tugmasi pastda, "Keyingisi" tepada bo'ladi */
+        gap: 10px;
+    }
+
+    .glass-card div[style*="display: flex"] button {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Header qismini markazlashtirish */
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        margin-bottom: 30px !important;
+    }
+
+    /* Natija sahifasidagi katta iconni kichraytirish */
+    .result-icon {
+        font-size: 50px !important;
+    }
+}
+
+/* Kichik telefonlar uchun (Max-width: 380px) */
+@media (max-width: 380px) {
+    .glass-card {
+        padding: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.1rem !important;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 15px;
+    flex: 1;
+    max-width: 500px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-wrapper:focus-within {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.3);
+}
+
+.search-icon {
+    color: var(--accent);
+    margin-right: 15px;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+#test-search {
+    background: none;
+    border: none;
+    color: white;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+#test-search::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.search-badge {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent);
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.avatar {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .search-wrapper { order: 3; max-width: 100%; }
+}
+
+.lang-btn {
+    cursor: pointer;
+    opacity: 0.5;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.lang-btn.active {
+    opacity: 1;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+.main-header {
+    /* Eng muhim qismi */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Boshqa elementlardan ustun turishi uchun */
+    
+    /* Vizual effektlar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; /* Header atrofidagi joy */
+    margin-bottom: 30px;
+    
+    /* Glassmorphism effekti skroll bo'lganda chiroyli ko'rinishi uchun */
+    backdrop-filter: blur(15px); /* Orqa fonni xiralashtirish */
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* Silliq o'tish */
+    transition: all 0.3s ease;
+}
+
+/* Konteyner ichidagi paddingni moslashtirish */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px; /* Tepadan paddingni olib tashladik, chunki header sticky bo'ldi */
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Planshetlar va kichik noutbuklar uchun */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px !important;
+    }
+    .main-header {
+        padding: 15px 20px;
+    }
+}
+
+/* Mobil telefonlar uchun (768px dan kichik) */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column; /* Elementlarni ustun shakliga keltiradi */
+        align-items: stretch;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .search-wrapper {
+        order: 3; /* Qidiruvni eng pastga tushiradi */
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .logo-area {
+        text-align: center;
+        order: 1;
+    }
+
+    .language-selector {
+        order: 2;
+        justify-content: center;
+        align-self: center;
+    }
+
+    .test-grid {
+        grid-template-columns: 1fr !important; /* Testlarni bitta ustun qiladi */
+        gap: 20px;
+    }
+
+    .glass-card {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* Juda kichik ekranlar uchun (iPhone SE va shunga o'xshash) */
+@media (max-width: 480px) {
+    .search-badge {
+        display: none; /* Joyni tejash uchun badgeni yashiramiz */
+    }
+    
+    .btn-primary {
+        padding: 15px !important; /* Barmoq bilan bosish oson bo'lishi uchun */
+        font-size: 1rem;
+    }
+
+    .glass-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px); /* Shisha effekti */
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    /* Paddingni 10px dan 6px ga tushirdik, ingichka bo'lishi uchun */
+    padding: 6px 16px; 
+    border-radius: 50px; /* To'liq oval shakli */
+    flex: 1;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.search-wrapper:focus-within {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.search-icon {
+    font-size: 0.9rem; /* Ikonkani biroz kichraytirdik */
+    color: var(--accent);
+    margin-right: 12px;
+    opacity: 0.7;
+}
+
+#test-search {
+    background: none;
+    border: none;
+    color: white;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem; /* Matn o'lchami ham ingichka bo'lishi uchun */
+    padding: 4px 0;   /* Inputning o'zini balandligini kamaytirish */
+}
+
+#test-search::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.search-badge {
+    font-size: 0.65rem; /* Badgeni ham proporsional kichraytirdik */
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+/* result */
+.review-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.review-option {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+}
+/* Foydalanuvchi xato qilgan variant */
+.opt-wrong {
+    background: rgba(244, 63, 94, 0.2);
+    border: 1px solid #f43f5e;
+    color: #fda4af;
+}
+/* To'g'ri javob varianti */
+.opt-correct {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid #10b981;
+    color: #6ee7b7;
+}
+.badge-status {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.option {
+    background: rgba(255, 255, 255, 0.05);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+.option:hover { background: rgba(56, 189, 248, 0.1); border-color: var(--accent); }
+
+
+:root {
+    --bg-color: #0b1426;
+    --card-bg: #121d33;
+    --input-bg: #1a263e;
+    --accent-blue: #00c3f5;
+    --text-gray: #a0aec0;
+    --white: #ffffff;
+    --border-color: #313d4f;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.form-card {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.header-section h2 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    color: var(--white);
+}
+
+.header-section p {
+    color: var(--text-gray);
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* Inputlar qismi */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 8px rgba(0, 195, 245, 0.2);
+}
+
+/* Fayl yuklash maydoni */
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.drop-zone:hover {
+    border-color: var(--accent-blue);
+    background-color: rgba(0, 195, 245, 0.05);
+}
+
+.upload-icon-svg {
+    fill: var(--accent-blue);
+    width: 45px;
+    margin-bottom: 10px;
+}
+
+.btn-select {
+    background-color: #1e2a44;
+    color: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Pastki tugmalar */
+.button-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-submit {
+    background-color: var(--accent-blue);
+    color: #0b1426;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    flex: 2;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.btn-cancel {
+    background-color: #2d3748;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    flex: 1;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.btn-cancel:hover {
+    background-color: #3f495a;
+}

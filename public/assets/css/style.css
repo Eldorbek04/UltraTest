@@ -1,0 +1,658 @@
+:root {
+    --sidebar-width: 260px;
+    --sidebar-bg: #111827;
+    --main-bg: #0f172a;
+    --accent: #38bdf8;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; text-decoration: none;}
+
+body {
+    background-color: var(--main-bg);
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    color: var(--text-main);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo i { color: var(--accent); }
+.logo span { color: var(--accent); }
+
+.nav-links { list-style: none; }
+.nav-links li { margin-bottom: 8px; }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 12px;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.nav-links a i { margin-right: 15px; font-size: 1.2rem; min-width: 25px; text-align: center; }
+
+.nav-links a.active {
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+}
+
+.nav-links a:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+}
+
+/* --- MAIN CONTENT --- */
+.content {
+    margin-left: var(--sidebar-width);
+    padding: 40px;
+    width: calc(100% - var(--sidebar-width));
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    transition: var(--transition);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.btn-add {
+    background: var(--accent);
+    color: #0f172a;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+}
+.btn-add:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4); }
+
+/* --- STATS CARDS --- */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: 0.3s;
+}
+.stat-card:hover { border-color: var(--accent); background: rgba(255, 255, 255, 0.08); }
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(56, 189, 248, 0.15);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.stat-info p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 5px; font-weight: 500; }
+.stat-info h2 { font-size: 2rem; font-weight: 800; }
+
+/* --- TABLE --- */
+.table-container {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 25px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+}
+
+.table-title { margin-bottom: 20px; font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+
+table { width: 100%; border-collapse: collapse; min-width: 700px; }
+th { text-align: left; color: var(--text-dim); padding: 18px; border-bottom: 1px solid var(--border); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+td { padding: 18px; border-bottom: 1px solid var(--border); font-size: 0.95rem; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+.pro { background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+.free { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+.actions { display: flex; gap: 10px; }
+.btn-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-edit:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+.btn-delete:hover { background: #ef4444; color: #fff; border-color: #ef4444; }
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 1024px) {
+    :root { --sidebar-width: 85px; }
+    .sidebar .logo span, .sidebar .nav-links span { display: none; }
+    .sidebar .nav-links a { justify-content: center; }
+    .sidebar .nav-links a i { margin-right: 0; }
+    .content { margin-left: 85px; width: calc(100% - 85px); }
+}
+
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    .sidebar .logo { margin-bottom: 20px; justify-content: center; }
+    .sidebar .nav-links { display: flex; justify-content: space-around; }
+    .content { margin-left: 0; width: 100%; padding: 20px; }
+    .header { text-align: center; }
+    .btn-add { width: 100%; justify-content: center; }
+}
+
+/* Faol menyu elementi uchun zamonaviy stil */
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    color: #a0a0a0; /* Faol bo'lmagan holat */
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+/* Faol holat uchun */
+.nav-links a.active {
+    background: rgba(0, 210, 255, 0.1) !important;
+    color: #00d2ff !important;
+}
+
+.nav-links a.active i {
+    color: #00d2ff !important;
+}
+
+/* Hover effekti */
+.nav-links a:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+/* ======================= */
+/* message */
+/* ========================== */
+
+/* Ikonka va badge uchun asos */
+.nav-icon-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px; /* Ikonka va yozuv orasidagi masofa */
+}
+
+/* Bildirishnoma soni (Badge) */
+.nav-badge {
+    position: absolute;
+    top: -6px;        /* Tepadan joylashuvi */
+    right: -8px;      /* O'ngdan joylashuvi */
+    background: #ff4d4d; /* Yorqin qizil rang */
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 50%; /* Dumaloq shakl */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #1c1d26; /* Sidebar foni bilan bir xil rang (chegara) */
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.4); /* Neon nuri effekti */
+    z-index: 1;
+}
+
+/* Bell ikonkasining o'lchami */
+.nav-icon-container i {
+    font-size: 1.1rem;
+    color: #a0a0a0; /* Faol bo'lmagandagi rang */
+}
+
+/* Faol holatda rangini o'zgartirish */
+.active .nav-icon-container i {
+    color: #00d2ff;
+}
+
+/* profil name uchun */
+
+/* Sidebarni flex konteyner qilish */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ekran bo'yi barobar */
+    padding: 20px 15px;
+    background-color: #1a1a1a; /* Sidebar foni (namuna) */
+    position: fixed;
+    width: 260px;
+}
+
+/* Menyular ro'yxatini cho'ziladigan qilish */
+.nav-links {
+    flex-grow: 1; /* Profilni pastga surish uchun joyni egallaydi */
+    list-style: none;
+    padding: 0;
+}
+
+/* Profil bloki stili */
+.user-profile {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05); /* Yengil fon */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4dff71;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.user-status {
+    color: #888;
+    font-size: 12px;
+}
+
+/* Sishish effekti */
+.user-profile:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+/* category uchun */
+
+/* Header umumiy strukturasi */
+.main-header {
+    display: flex;
+    flex-wrap: wrap; /* Elementlar ko'paysa pastga tushishi uchun */
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 15px 30px;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Kategoriya konteyneri */
+.header-categories {
+    width: 100%; /* To'liq qatorni egallaydi */
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+/* Har bir kategoriya linki */
+.cat-item {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Hover va Active holati */
+.cat-item:hover, .cat-item.active {
+    color: var(--accent, #ff4d4d);
+}
+
+/* Tagidagi ingichka chiziq effekti */
+.cat-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent, #ff4d4d);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+.cat-item:hover::after, .cat-item.active::after {
+    width: 100%;
+}
+
+/* Mobil qurilmalar uchun scrol bo'ladigan qilish */
+@media (max-width: 768px) {
+    .header-categories {
+        justify-content: flex-start;
+        overflow-x: auto; /* Sig'masa yon tomonga scroll bo'ladi */
+        padding-bottom: 10px;
+        scrollbar-width: none; /* Firefox uchun */
+    }
+    .header-categories::-webkit-scrollbar {
+        display: none; /* Chrome/Safari uchun */
+    }
+    .cat-item {
+        white-space: nowrap; /* Matnni bitta qatorda saqlaydi */
+    }
+}
+
+/* sidebar uchun */
+
+.sidebar {
+    width: 280px; /* Bir oz kengroq qilish tavsiya etiladi */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #121417; /* To'q fon */
+    padding: 25px 15px; /* Ichki bo'shliq qo'shildi */
+    position: fixed;
+    left: 0;
+    top: -10;
+    overflow: hidden;
+}
+
+/* Menyular ro'yxati */
+.nav-links {
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0; /* Logo va Profil orasidagi masofa */
+    
+    /* Scrollbarni yashirish (toza ko'rinish uchun) */
+    scrollbar-width: none; 
+}
+
+.nav-links::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-links li {
+    margin-bottom: 8px; /* Linklar orasidagi masofa */
+}
+
+.user-profile {
+    margin-top: auto; /* Pastga suradi */
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-profile img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #00b7ff; /* Neon ko'k ramka */
+}
+
+.user-info .user-name {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.user-info .user-status {
+    color: #666;
+    font-size: 12px;
+}
+
+/* faol seanslar */
+
+.active-sessions-container {
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-header h2 {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.session-card {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.session-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 183, 255, 0.2);
+}
+
+.session-card.current {
+    border-left: 4px solid #00b7ff;
+}
+
+.session-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 20px;
+    color: #00b7ff;
+    margin-right: 20px;
+}
+
+.session-details {
+    flex-grow: 1;
+}
+
+.device-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.status-badge {
+    background: rgba(0, 255, 128, 0.1);
+    color: #00ff80;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.ip-address, .last-active {
+    color: #666;
+    font-size: 13px;
+    margin: 0;
+}
+
+.btn-logout-session {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.btn-logout-session.secondary {
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+}
+
+.btn-logout-session.secondary:hover {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+.terminate-all-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.terminate-all-btn:hover {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+.alert {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    position: relative;
+    font-size: 15px;
+    animation: slideDown 0.4s ease;
+}
+
+.alert-success {
+    background-color: #e6f7ef;
+    color: #1e7e34;
+    border-left: 5px solid #28a745;
+}
+
+.alert-body {
+    padding-right: 30px;
+}
+
+.alert .close {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #1e7e34;
+}
+
+.alert .close:hover {
+    opacity: 0.7;
+}
+
+.fade {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade.hide {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
